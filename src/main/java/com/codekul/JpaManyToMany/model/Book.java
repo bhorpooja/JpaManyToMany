@@ -1,5 +1,9 @@
 package com.codekul.JpaManyToMany.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,8 +19,10 @@ public class Book {
     String bookName;
     String bookAuth;
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "book_student", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "bookId"), inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
+    @JsonBackReference
     Set<Student> students;
 
     public Set<Student> getStudents() {

@@ -1,5 +1,9 @@
 package com.codekul.JpaManyToMany.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,8 +19,9 @@ public class Student {
     String name;
     String dept;
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "students")
+//    @JsonManagedReference
     Set<Book> books;
 
     public Set<Book> getBooks() {
